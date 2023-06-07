@@ -1,0 +1,12 @@
+{
+  "users": [
+    {
+      "email": "john.doe@example.com",
+      "searchLocations": ["скопје", "кисела вода", "зола"]
+    },
+    {
+      "email": "jane.doe@example.com",
+      "searchLocations": ["скопје"]
+    }
+  ]
+}
