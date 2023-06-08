@@ -1,6 +1,6 @@
 import { OutagesPerUserModel } from "../model/outagesModel";
 const mailApiKey = process.env.MAIL_API_KEY;
-const mailApiSecret = process.env.MAIL_API_SECRET;
+const mailApiSecret = process.env.MAIL_SECRET;
 
 const mailjet = require("node-mailjet").apiConnect(
   mailApiKey, mailApiSecret
