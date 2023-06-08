@@ -1,10 +1,6 @@
 {
   "users": [
     {
-      "email": "jovanovska.meri88@gmail.com",
-      "searchLocations": ["скопје", "кисела вода", "зола"]
-    },
-    {
       "email": "kantarofilip@gmail.com",
       "searchLocations": ["скопје"]
     }

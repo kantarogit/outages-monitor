@@ -1,11 +1,14 @@
 import { OutagesPerUserModel } from "../model/outagesModel";
+const mailApiKey = process.env.MAIL_API_KEY;
+const mailApiSecret = process.env.MAIL_API_SECRET;
 
 const mailjet = require("node-mailjet").apiConnect(
-  "2beb28c48c2a7e89bb1320cb7231f442",
-  "9307030d392d74c4646a8aa40d5b4683"
+  mailApiKey, mailApiSecret
 );
 
 export async function sendEmail(outagesPerUser: Array<OutagesPerUserModel>) {
+  console.log('inside sendEmail');
+  console.log(outagesPerUser);
   outagesPerUser.forEach((user: OutagesPerUserModel) => {
     const outages = user.outages;
     const html =
@@ -14,7 +17,11 @@ export async function sendEmail(outagesPerUser: Array<OutagesPerUserModel>) {
           outages
             .map(
               (outage) => 
-                `<li>${outage.municipality} - ${outage.address} - ${outage.start} - ${outage.end}</li>`
+              // municipality and address should be in a same line but start and end time 1 line below
+              // start and end should be bolded and with a red color h2 tag
+              `<li>${outage.municipality} - ${outage.address}<br/><h2>${outage.start} - ${outage.end}</h2></li>`
+
+                // `<li>${outage.municipality} - ${outage.address} - ${outage.start} - ${outage.end}</li>`
             )
             .join("") +
           "</ul>"
@@ -48,17 +55,20 @@ export async function sendEmail(outagesPerUser: Array<OutagesPerUserModel>) {
   });
 }
 
-sendEmail([
-  {
-    email: "kantarofilip@gmail.com",
-    outages: [
-      {
-        start: "2023-06-08T07:00:00.000Z",
-        end: "2023-06-08T11:00:00.000Z",
-        municipality: "Скопје Ѓорче Петров",
-        address:
-          "СКОПЈЕ - КАРПОШ: Дел од корисниците на Осло (од страната кон Реплек)",
-      },
-    ],
-  },
-]);
+// const outagesPerUser: Array<OutagesPerUserModel> = JSON.parse(process.argv[2]);
+// sendEmail(outagesPerUser);
+
+// sendEmail([
+//   {
+//     email: "kantarofilip@gmail.com",
+//     outages: [
+//       {
+//         start: "2023-06-08T07:00:00.000Z",
+//         end: "2023-06-08T11:00:00.000Z",
+//         municipality: "Скопје Ѓорче Петров",
+//         address:
+//           "СКОПЈЕ - КАРПОШ: Дел од корисниците на Осло (од страната кон Реплек)",
+//       },
+//     ],
+//   },
+// ]);
