@@ -1,6 +1,6 @@
 export type EvnModel = {
-    start: Date,
-    end: Date,
+    start: string,
+    end: string,
     municipality: string,
     address: string,
 }

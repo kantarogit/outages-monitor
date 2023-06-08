@@ -24,7 +24,7 @@ export async function getEvnOutages() {
 }
 
 export function parseEvn(): Array<EvnModel> {
-  const workbook = readFile('evn-data/my.xlsx');
+  const workbook = readFile('evn-data/evnOutages.xlsx');
   const sheetName = workbook.SheetNames[0];
   const sheet = workbook.Sheets[sheetName];
 
@@ -45,8 +45,8 @@ export function parseEvn(): Array<EvnModel> {
     const address = sheet[`D${firstDataRow}`]?.w;
 
     evnData.push({
-      start: new Date(start ?? ""),
-      end: new Date(end ?? ""),
+      start: start ?? "",
+      end: end ?? "",
       municipality: municipality ?? "",
       address: address ?? "",
     });
