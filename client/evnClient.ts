@@ -4,15 +4,15 @@ import { readFile } from "xlsx";
 import { EvnModel } from "../model/evnModel";
 
 export async function saveEnvFile() {
-  console.log("prepare to download file...");
+  console.log("Prepare to download file...");
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
   const year = tomorrow.getFullYear();
   const month = (tomorrow.getMonth() + 1).toString().padStart(2, "0");
   const day = tomorrow.getDate().toString().padStart(2, "0");
-  //   const url = `https://www.elektrodistribucija.mk/Files/Planirani-isklucuvanja-Samo-aktuelno/${year}${month}${day}_Planned_Outages_MK.aspx`;
-  const url =
-    "https://www.elektrodistribucija.mk/Files/Planirani-isklucuvanja-Samo-aktuelno/20230609_Planned_Outages_MK.aspx";
+  const url = `https://www.elektrodistribucija.mk/Files/Planirani-isklucuvanja-Samo-aktuelno/${year}${month}${day}_Planned_Outages_MK.aspx`;
+  // const url =
+  //   "https://www.elektrodistribucija.mk/Files/Planirani-isklucuvanja-Samo-aktuelno/20230609_Planned_Outages_MK.aspx";
 
   try {
     const response = await axios.get(url, { responseType: "stream" });
@@ -28,24 +28,13 @@ export async function saveEnvFile() {
   } catch (error) {
     throw new Error("File download failed");
   }
-  // return axios
-  //   .get(url, { responseType: "stream" })
-  //   .then(function (response) {
-  //     console.log("Downloading file...");
-  //     response.data.pipe(fs.createWriteStream("evn-data/evnOutages.xlsx"));
-  //   })
-  //   .catch(function (error) {
-  //     console.log("Error downloading file...");
-  //     console.log(error);
-  //   });
 }
 
 export async function parseEvnData(): Promise<Array<EvnModel>> {
   await saveEnvFile();
 
-  console.log("openinng workbook...");
   const workbook = readFile("evn-data/evnOutages.xlsx");
-  console.log("workboooook");
+
   console.log(workbook.SheetNames);
   const sheetName = workbook.SheetNames[0];
   const sheet = workbook.Sheets[sheetName];
@@ -75,9 +64,6 @@ export async function parseEvnData(): Promise<Array<EvnModel>> {
 
     firstDataRow++;
   }
-  console.log("outages per user: ");
-  console.log(JSON.stringify(evnData));
-
   return evnData;
 }
 

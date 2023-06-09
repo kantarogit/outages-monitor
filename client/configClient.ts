@@ -10,7 +10,9 @@ function getUser(email: string) {
   const users = getUsers();
   const user = users.find((user: any) => user.email === email);
   if (user) {
-    console.log(`User ${email} found with search locations: ${user.searchLocations}`);
+    console.log(
+      `User ${email} found with search locations: ${user.searchLocations}`
+    );
   } else {
     console.log(`User ${email} not found`);
   }

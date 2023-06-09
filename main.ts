@@ -2,7 +2,6 @@ import { getUsers } from "./client/configClient";
 import { parseEvnData, searchEvnOutages } from "./client/evnClient";
 import { sendEmail } from "./client/mailClient";
 import { OutagesPerUserModel } from "./model/outagesModel";
-import { userModel } from "./model/userModel";
 
 export async function evnFlow(): Promise<Array<OutagesPerUserModel>> {
   let outagesPerUser = Array<OutagesPerUserModel>();

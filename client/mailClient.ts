@@ -1,18 +1,10 @@
 import { OutagesPerUserModel } from "../model/outagesModel";
 const mailApiKey = process.env.MAIL_API_KEY;
 const mailApiSecret = process.env.MAIL_SECRET;
-// console.log('envvvvs');
-// console.log(process.env);
-
-
-const mailjet = require("node-mailjet").apiConnect(
-  mailApiKey, mailApiSecret
-);
-
-
+const mailjet = require("node-mailjet").apiConnect(mailApiKey, mailApiSecret);
 
 export async function sendEmail(outagesPerUser: Array<OutagesPerUserModel>) {
-  console.log('inside sendEmail');
+  console.log("inside sendEmail");
   console.log(outagesPerUser);
   outagesPerUser.forEach((user: OutagesPerUserModel) => {
     const outages = user.outages;
@@ -21,12 +13,8 @@ export async function sendEmail(outagesPerUser: Array<OutagesPerUserModel>) {
         ? "<h3>Planned outages for your address</h3> <br/> <ul>" +
           outages
             .map(
-              (outage) => 
-              // municipality and address should be in a same line but start and end time 1 line below
-              // start and end should be bolded and with a red color h2 tag
-              `<li>${outage.municipality} - ${outage.address}<br/><h2>${outage.start} - ${outage.end}</h2></li>`
-
-                // `<li>${outage.municipality} - ${outage.address} - ${outage.start} - ${outage.end}</li>`
+              (outage) =>
+                `<li>${outage.municipality} - ${outage.address}<br/><h2>${outage.start} - ${outage.end}</h2></li>`
             )
             .join("") +
           "</ul>"
