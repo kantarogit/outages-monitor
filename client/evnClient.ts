@@ -10,7 +10,8 @@ export async function getEvnOutages() {
   const year = tomorrow.getFullYear();
   const month = (tomorrow.getMonth() + 1).toString().padStart(2, "0");
   const day = tomorrow.getDate().toString().padStart(2, "0");
-  const url = `https://www.elektrodistribucija.mk/Files/Planirani-isklucuvanja-Samo-aktuelno/${year}${month}${day}_Planned_Outages_MK.aspx`;
+//   const url = `https://www.elektrodistribucija.mk/Files/Planirani-isklucuvanja-Samo-aktuelno/${year}${month}${day}_Planned_Outages_MK.aspx`;
+  const url = 'https://www.elektrodistribucija.mk/Files/Planirani-isklucuvanja-Samo-aktuelno/20230609_Planned_Outages_MK.aspx';
     return axios
       .get(url, { responseType: "stream" })
       .then(function (response) {
