@@ -7,9 +7,9 @@ import { userModel } from "./model/userModel";
 export async function processEvnData(): Promise<Array<OutagesPerUserModel>> {
   let outagesPerUser = Array<OutagesPerUserModel>();
 
-  getUsers().forEach((user: userModel) => {
+  getUsers().forEach(async (user: userModel) => {
     const searchLocations = user.searchLocations;
-    let data = parseEvn();
+    let data = await parseEvn();
     let outages = searchEvnOutages(data, searchLocations);
 
     outagesPerUser.push({
