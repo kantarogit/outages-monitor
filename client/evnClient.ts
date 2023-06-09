@@ -28,6 +28,8 @@ export async function parseEvn(): Promise<Array<EvnModel>> {
   await getEvnOutages();
   
   const workbook = readFile('evn-data/evnOutages.xlsx');
+  console.log('workboooook');
+  console.log(workbook.SheetNames);
   const sheetName = workbook.SheetNames[0];
   const sheet = workbook.Sheets[sheetName];
 
