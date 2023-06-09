@@ -5,8 +5,13 @@ const mailApiSecret = process.env.MAIL_SECRET;
 // console.log(process.env);
 
 
+// const mailjet = require("node-mailjet").apiConnect(
+//   mailApiKey, mailApiSecret
+// );
+
 const mailjet = require("node-mailjet").apiConnect(
-  mailApiKey, mailApiSecret
+  "2beb28c48c2a7e89bb1320cb7231f442",
+  "9307030d392d74c4646a8aa40d5b4683"
 );
 
 export async function sendEmail(outagesPerUser: Array<OutagesPerUserModel>) {
@@ -57,21 +62,3 @@ export async function sendEmail(outagesPerUser: Array<OutagesPerUserModel>) {
       });
   });
 }
-
-// const outagesPerUser: Array<OutagesPerUserModel> = JSON.parse(process.argv[2]);
-// sendEmail(outagesPerUser);
-
-// sendEmail([
-//   {
-//     email: "kantarofilip@gmail.com",
-//     outages: [
-//       {
-//         start: "2023-06-08T07:00:00.000Z",
-//         end: "2023-06-08T11:00:00.000Z",
-//         municipality: "Скопје Ѓорче Петров",
-//         address:
-//           "СКОПЈЕ - КАРПОШ: Дел од корисниците на Осло (од страната кон Реплек)",
-//       },
-//     ],
-//   },
-// ]);

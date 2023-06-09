@@ -1,28 +1,26 @@
 import { getUsers } from "./client/configClient";
-import { parseEvn, searchEvnOutages } from "./client/evnClient";
+import { parseEvnData, searchEvnOutages } from "./client/evnClient";
 import { sendEmail } from "./client/mailClient";
 import { OutagesPerUserModel } from "./model/outagesModel";
 import { userModel } from "./model/userModel";
 
-export async function processEvnData(): Promise<Array<OutagesPerUserModel>> {
+export async function evnFlow(): Promise<Array<OutagesPerUserModel>> {
   let outagesPerUser = Array<OutagesPerUserModel>();
 
-  getUsers().forEach(async (user: userModel) => {
+  for( const user of getUsers()) {
     const searchLocations = user.searchLocations;
-    let data = await parseEvn();
+    let data = await parseEvnData();
     let outages = searchEvnOutages(data, searchLocations);
 
     outagesPerUser.push({
       email: user.email,
       outages: outages,
     });
-  });
-  console.log('outages per user: ');
-  console.log(JSON.stringify(outagesPerUser));
+  };
   return outagesPerUser;
 }
 
-processEvnData()
+evnFlow()
   .then((outagesPerUser: Array<OutagesPerUserModel>) => {
     sendEmail(outagesPerUser);
   })
