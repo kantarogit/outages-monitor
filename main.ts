@@ -6,7 +6,7 @@ import { OutagesPerUserModel } from "./model/outagesModel";
 export async function evnFlow(): Promise<Array<OutagesPerUserModel>> {
   let outagesPerUser = Array<OutagesPerUserModel>();
 
-  for( const user of getUsers()) {
+  for (const user of getUsers()) {
     const searchLocations = user.searchLocations;
     let data = await parseEvnData();
     let outages = searchEvnOutages(data, searchLocations);
@@ -15,7 +15,7 @@ export async function evnFlow(): Promise<Array<OutagesPerUserModel>> {
       email: user.email,
       outages: outages,
     });
-  };
+  }
   return outagesPerUser;
 }
 
