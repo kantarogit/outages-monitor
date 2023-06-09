@@ -17,6 +17,7 @@ export async function processEvnData(): Promise<Array<OutagesPerUserModel>> {
       outages: outages,
     });
   });
+  console.log('outages per user: ');
   console.log(JSON.stringify(outagesPerUser));
   return outagesPerUser;
 }
