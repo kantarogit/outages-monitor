@@ -5,14 +5,11 @@ const mailApiSecret = process.env.MAIL_SECRET;
 // console.log(process.env);
 
 
-// const mailjet = require("node-mailjet").apiConnect(
-//   mailApiKey, mailApiSecret
-// );
-
 const mailjet = require("node-mailjet").apiConnect(
-  "2beb28c48c2a7e89bb1320cb7231f442",
-  "9307030d392d74c4646a8aa40d5b4683"
+  mailApiKey, mailApiSecret
 );
+
+
 
 export async function sendEmail(outagesPerUser: Array<OutagesPerUserModel>) {
   console.log('inside sendEmail');
