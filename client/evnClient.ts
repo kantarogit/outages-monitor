@@ -3,7 +3,7 @@ import fs from "fs";
 import { readFile } from "xlsx";
 import { EvnModel } from "../model/evnModel";
 
-export function getEvnOutages() {
+export async function getEvnOutages() {
   console.log("getEvnOutages()");
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
@@ -25,7 +25,7 @@ export function getEvnOutages() {
 }
 
 export async function parseEvn(): Promise<Array<EvnModel>> {
-  getEvnOutages();
+  await getEvnOutages();
   
   const workbook = readFile('evn-data/evnOutages.xlsx');
   console.log('workboooook');
