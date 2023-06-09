@@ -21,5 +21,8 @@ jobs:
           npm install
           npx tsc
       - name: Run main function
+        env:
+          MAIL_API_KEY: ${{ secrets.MAIL_API_KEY }}
+          MAIL_SECRET: ${{ secrets.MAIL_SECRET }}
         run: |
            npm run startApp
