@@ -1,5 +1,5 @@
 # outages-monitor
-Get a mail notification every time there is planned power outage in your area
+Get a mail notification every time there is planned power outage in your area.
 
 This is a Node.js application that notifies users of planned outages by EVN Macedonia, in their area using data from the EVN website.
 
