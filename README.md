@@ -15,10 +15,13 @@ To use the application, run the following command:
 
 This will run the `evnFlow` function, which retrieves the planned outages for each user in the `users.json` file and sends an email notification to each user.
 Note that a valid api and secret keys for a mailjet account are required as a environment variables.
-See [link:](https://www.mailjet.com/)
+See more at [https://www.mailjet.com](https://www.mailjet.com/).
 
 ## Configuration
 The `appCOnfig.json` contains the user data in a object of pairs of the following properties:
 
-email: The email address to send notifications to.
-searchLocations: An array of search locations to retrieve outage data for.
+- email: The email address to send notifications to.
+- searchLocations: An array of search locations to retrieve outage data for.
+
+## Actions
+A chron job scheduled each day at 10pm will run the whole process, thus basically automating the whole flow, so you never miss a power outage again 😉
