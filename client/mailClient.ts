@@ -8,42 +8,42 @@ export async function sendEmail(outagesPerUser: Array<OutagesPerUserModel>) {
   console.log(outagesPerUser);
   outagesPerUser.forEach((user: OutagesPerUserModel) => {
     const outages = user.outages;
-    const html =
-      outages.length > 0
-        ? "<h3>Planned outages for your address</h3> <br/> <ul>" +
-          outages
-            .map(
-              (outage) =>
-                `<li>${outage.municipality} - ${outage.address}<br/><h2>${outage.start} - ${outage.end}</h2></li>`
-            )
-            .join("") +
-          "</ul>"
-        : "<h3>There are no planned outages for your address</h3>";
+    let html;
+    if (outages.length > 0) {
+      html = "<h3>Planned outages for your locations</h3> <br/> <ul>";
+      html += outages
+        .map(
+          (outage) =>
+            `<li>${outage.municipality} - ${outage.address}<br/><h2>${outage.start} - ${outage.end}</h2></li>`
+        )
+        .join("");
+      html += "</ul>";
 
-    const request = mailjet.post("send", { version: "v3.1" }).request({
-      Messages: [
-        {
-          From: {
-            Email: "kantarofilip@gmail.com",
-            Name: "EVN Outages",
-          },
-          To: [
-            {
-              Email: user.email,
+      const request = mailjet.post("send", { version: "v3.1" }).request({
+        Messages: [
+          {
+            From: {
+              Email: "kantarofilip@gmail.com",
+              Name: "EVN Outages",
             },
-          ],
-          Subject: "Planned outages for tomorrow",
-          TextPart: "Planned outages for tomorrow",
-          HTMLPart: html,
-        },
-      ],
-    });
-    request
-      .then((result: any) => {
-        console.log(result.body);
-      })
-      .catch((err: any) => {
-        console.log(err.statusCode);
+            To: [
+              {
+                Email: user.email,
+              },
+            ],
+            Subject: "Planned EVN power outage",
+            TextPart: "Planned EVN power outage",
+            HTMLPart: html,
+          },
+        ],
       });
+      request
+        .then((result: any) => {
+          console.log(result.body);
+        })
+        .catch((err: any) => {
+          console.log(err.statusCode);
+        });
+    }
   });
 }

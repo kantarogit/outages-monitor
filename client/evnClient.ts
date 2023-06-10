@@ -5,14 +5,15 @@ import { EvnModel } from "../model/evnModel";
 
 export async function saveEnvFile() {
   console.log("Prepare to download file...");
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  const year = tomorrow.getFullYear();
-  const month = (tomorrow.getMonth() + 1).toString().padStart(2, "0");
-  const day = tomorrow.getDate().toString().padStart(2, "0");
-  // const url = `https://www.elektrodistribucija.mk/Files/Planirani-isklucuvanja-Samo-aktuelno/${year}${month}${day}_Planned_Outages_MK.aspx`;
-  const url =
-    "https://www.elektrodistribucija.mk/Files/Planirani-isklucuvanja-Samo-aktuelno/20230609_Planned_Outages_MK.aspx";
+  const dayToCheck = new Date();
+  dayToCheck.setDate(dayToCheck.getDate() + 2);
+
+  const year = dayToCheck.getFullYear();
+  const month = (dayToCheck.getMonth() + 1).toString().padStart(2, "0");
+  const day = dayToCheck.getDate().toString().padStart(2, "0");
+  const url = `https://www.elektrodistribucija.mk/Files/Planirani-isklucuvanja-Samo-aktuelno/${year}${month}${day}_Planned_Outages_MK.aspx`;
+  // const url =
+  //   "https://www.elektrodistribucija.mk/Files/Planirani-isklucuvanja-Samo-aktuelno/20230609_Planned_Outages_MK.aspx";
 
   try {
     const response = await axios.get(url, { responseType: "stream" });
@@ -72,6 +73,6 @@ export function searchEvnOutages(
   addresses: Array<string>
 ): Array<EvnModel> {
   return data.filter((evn) =>
-    addresses.every((address) => evn.address.toLowerCase().includes(address))
+    addresses.some((address) => evn.address.toLowerCase().includes(address))
   );
 }

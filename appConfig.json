@@ -2,12 +2,7 @@
   "users": [
     {
       "email": "kantarofilip@gmail.com",
-      "searchLocations": ["виница"]
-    },
-    {
-      "email": "ngbarak@gmail.com",
-      "searchLocations": ["охрид"]
+      "searchLocations": ["гологанов", "тафталиџе", "прашка", "алумина", "теодосиј"]
     }
-  
   ]
 }

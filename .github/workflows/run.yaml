@@ -1,11 +1,10 @@
 name: Run
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+# schedule should be every night at 10 pm
 
+on:
+  schedule:
+    - cron: '0 22 * * *'
 
 jobs:
   build:
