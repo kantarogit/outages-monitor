@@ -27,6 +27,7 @@ export async function saveEnvFile() {
       writer.on("error", reject);
     });
   } catch (error) {
+    console.log(url);
     throw new Error("File download failed");
   }
 }
