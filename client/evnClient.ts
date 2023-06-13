@@ -6,7 +6,7 @@ import { EvnModel } from "../model/evnModel";
 export async function saveEnvFile() {
   console.log("Prepare to download file...");
   const dayToCheck = new Date();
-  dayToCheck.setDate(dayToCheck.getDate() + 2);
+  dayToCheck.setDate(dayToCheck.getDate() + 1);
 
   const year = dayToCheck.getFullYear();
   const month = (dayToCheck.getMonth() + 1).toString().padStart(2, "0");
@@ -28,7 +28,7 @@ export async function saveEnvFile() {
     });
   } catch (error) {
     console.log(url);
-    throw new Error("File download failed");
+    throw new Error("File download failed or file does not exist...");
   }
 }
 

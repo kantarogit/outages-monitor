@@ -4,8 +4,6 @@ const mailApiSecret = process.env.MAIL_SECRET;
 const mailjet = require("node-mailjet").apiConnect(mailApiKey, mailApiSecret);
 
 export async function sendEmail(outagesPerUser: Array<OutagesPerUserModel>) {
-  console.log("inside sendEmail");
-  console.log(outagesPerUser);
   outagesPerUser.forEach((user: OutagesPerUserModel) => {
     const outages = user.outages;
     let html;
