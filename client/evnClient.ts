@@ -3,17 +3,34 @@ import fs from "fs";
 import { readFile } from "xlsx";
 import { EvnModel } from "../model/evnModel";
 
-export async function saveEnvFile() {
-  console.log("Prepare to download file...");
-  const dayToCheck = new Date();
-  dayToCheck.setDate(dayToCheck.getDate() + 1);
+//function to make a get request to the url which has a html response
+export async function getEvnSite() {
+  try {
+    const response: AxiosResponse = await axios.get(
+      "https://www.elektrodistribucija.mk/Grid/Planned-disconnections.aspx"
+    );
 
-  const year = dayToCheck.getFullYear();
-  const month = (dayToCheck.getMonth() + 1).toString().padStart(2, "0");
-  const day = dayToCheck.getDate().toString().padStart(2, "0");
-  const url = `https://www.elektrodistribucija.mk/Files/Planirani-isklucuvanja-Samo-aktuelno/${year}${month}${day}_Planned_Outages_MK.aspx`;
-  // const url =
-  //   "https://www.elektrodistribucija.mk/Files/Planirani-isklucuvanja-Samo-aktuelno/20230609_Planned_Outages_MK.aspx";
+    const html = response.data;
+    const startIndex = html.indexOf(
+      "/Files/Planirani-isklucuvanja-Samo-aktuelno/"
+    );
+    const endIndex = html.indexOf('">Листа', startIndex);
+    const downloadUrl = html.substring(startIndex, endIndex);
+    console.log("Download: " + downloadUrl);
+
+    return downloadUrl;
+  } catch (error) {
+    console.log(error);
+    throw new Error(
+      "Cant open EVN site to see if there are any planned outages.."
+    );
+  }
+}
+
+export async function saveEvnFile() {
+  console.log("Prepare to download file...");
+  const url = "https://www.elektrodistribucija.mk" + (await getEvnSite());
+  console.log("URL: " + url);
 
   try {
     const response = await axios.get(url, { responseType: "stream" });
@@ -33,7 +50,7 @@ export async function saveEnvFile() {
 }
 
 export async function parseEvnData(): Promise<Array<EvnModel>> {
-  await saveEnvFile();
+  await saveEvnFile();
 
   const workbook = readFile("evn-data/evnOutages.xlsx");
 

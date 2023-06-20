@@ -23,6 +23,7 @@ export async function evnFlow(): Promise<Array<OutagesPerUserModel>> {
 
 evnFlow()
   .then((outagesPerUser: Array<OutagesPerUserModel>) => {
+    console.log(outagesPerUser);
     sendEmail(outagesPerUser);
   })
   .catch((err: any) => {
