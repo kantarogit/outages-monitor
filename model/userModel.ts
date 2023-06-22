@@ -1,4 +1,5 @@
 export type userModel = {
     email: string,
-    searchLocations: Array<string>
+    userEnergyCenter: string,
+    addressLocations: Array<string>
 }

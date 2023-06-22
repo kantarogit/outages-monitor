@@ -9,8 +9,7 @@ export async function evnFlow(): Promise<Array<OutagesPerUserModel>> {
   let data = await parseEvnData();
   if (data.length > 0) {
     for (const user of getUsers()) {
-      const searchLocations = user.searchLocations;
-      let outages = searchEvnOutages(data, searchLocations);
+      let outages = searchEvnOutages(data, user);
 
       outagesPerUser.push({
         email: user.email,

@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import fs from "fs";
 import { readFile } from "xlsx";
 import { EvnModel } from "../model/evnModel";
+import { userModel } from "../model/userModel";
 
 //function to make a get request to the url which has a html response
 export async function getEvnSite() {
@@ -71,12 +72,14 @@ export async function parseEvnData(): Promise<Array<EvnModel>> {
   while (firstDataRow <= lastDataRowNumber) {
     const start = sheet[`A${firstDataRow}`]?.w;
     const end = sheet[`B${firstDataRow}`]?.w;
-    const municipality = sheet[`C${firstDataRow}`]?.w;
-    const address = sheet[`D${firstDataRow}`]?.w;
+    const duration = sheet[`C${firstDataRow}`]?.w;
+    const municipality = sheet[`D${firstDataRow}`]?.w;
+    const address = sheet[`E${firstDataRow}`]?.w;
 
     evnData.push({
       start: start ?? "",
       end: end ?? "",
+      duration: duration ?? "",
       municipality: municipality ?? "",
       address: address ?? "",
     });
@@ -88,9 +91,9 @@ export async function parseEvnData(): Promise<Array<EvnModel>> {
 
 export function searchEvnOutages(
   data: Array<EvnModel>,
-  addresses: Array<string>
+  user: userModel
 ): Array<EvnModel> {
   return data.filter((evn) =>
-    addresses.some((address) => evn.address.toLowerCase().includes(address))
+    evn.municipality.toLowerCase().match(user.userEnergyCenter) && user.addressLocations.some((address) => evn.address.toLowerCase().includes(address))
   );
 }

@@ -2,15 +2,18 @@
   "users": [
     {
       "email": "kantarofilip@gmail.com",
-      "searchLocations": ["гологанов", "тафталиџе", "прашка", "алумина", "теодосиј"]
+      "userEnergyCenter": "скопје",
+      "addressLocations": ["гологанов", "тафталиџе", "прашка", "алумина", "теодосиј"]
     },
     {
       "email": "ngbarak@gmail.com",
-      "searchLocations": ["охрид"]
+      "userEnergyCenter": "охрид",
+      "addressLocations": ["охрид"]
     },
     {
       "email": "jovanovska.meri88@gmail.com",
-      "searchLocations": ["гологанов", "тафталиџе", "прашка", "алумина", "теодосиј", "универзална", "христо смирненски"]
+      "userEnergyCenter": "скопје",
+      "addressLocations": ["гологанов", "тафталиџе", "прашка", "алумина", "теодосиј", "универзална", "христо смирненски"]
     }
   ]
 }
