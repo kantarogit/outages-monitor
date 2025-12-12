@@ -1,8 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { OutageModel } from "../model/evnModel";
-import { userModel } from "../model/userModel";
+import { UserModel } from "../model/userModel";
 
-//function to make a get request to the url which has a html response
 export async function getAllOutages(): Promise<Array<OutageModel>> {
   try {
     console.log('Getting outages from EVN site...');
@@ -32,9 +31,12 @@ export async function getAllOutages(): Promise<Array<OutageModel>> {
 
 export function searchEvnOutages(
   evnOutagesData: Array<OutageModel>,
-  user: userModel
+  user: UserModel
 ): Array<OutageModel> {
   return evnOutagesData.filter((outageRecord) =>
-    outageRecord.municipality.toLowerCase().match(user.userEnergyCenter.toLowerCase()) && user.addressLocations.some((address) => outageRecord.address.toLowerCase().includes(address.toLowerCase()))
+    outageRecord.municipality.toLowerCase()
+      .match(user.municipality.toLowerCase()) && 
+      user.addressLocations.some((address) => 
+        outageRecord.address.toLowerCase().includes(address.toLowerCase()))
   );
 }
