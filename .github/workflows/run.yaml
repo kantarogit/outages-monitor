@@ -2,9 +2,7 @@ name: Run
 
 # schedule should be every night at 10 pm
 
-on:
-  schedule:
-    - cron: '0 20 * * *'
+on: workflow_dispatch
 
 jobs:
   build:
