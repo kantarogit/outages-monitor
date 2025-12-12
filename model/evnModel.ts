@@ -1,7 +1,9 @@
-export type EvnModel = {
+export type OutageModel = {
     start: string,
     end: string,
-    duration: string,
+    voltageLevel: string,
     municipality: string,
     address: string,
+    type: string,
+    energyCenter: number
 }
