@@ -2,7 +2,7 @@
   "users": [
     {
       "email": "kantarofilip@gmail.com",
-      "userEnergyCenter": "драчево",
+      "municipality": "штип",
       "addressLocations": [
         "гологанов",
         "тафталиџе",
@@ -10,20 +10,22 @@
         "алумина",
         "теодосиј",
         "МАГДАЛЕНА АНТЕВА",
+        "моша пијаде",
         "МРАМОРЕЦ",
-        "ЈАКУПИЦА"
+        "ЈАКУПИЦА",
+        "шашаварлија"
       ]
     },
     {
       "email": "ngbarak@gmail.com",
-      "userEnergyCenter": "охрид",
+      "municipality": "охрид",
       "addressLocations": [
         "охрид"
       ]
     },
     {
       "email": "jovanovska.meri88@gmail.com",
-      "userEnergyCenter": "скопје",
+      "municipality": "скопје",
       "addressLocations": [
         "гологанов",
         "тафталиџе",

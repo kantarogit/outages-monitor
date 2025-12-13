@@ -9,7 +9,7 @@ export async function getAllOutages(): Promise<Array<OutageModel>> {
       "https://portal-api.elektrodistribucija.mk/DSO/Prekini/ZemiPrekini"
     );
 
-    console.log(response.data);
+    // console.log(response.data);
     return response.data.map( (outageItem: { pocetok: any; kraj: any; napNivo: any; nasMesto: string; adresa: string; tipPrekin: any; kecId: any; }) => {
       return {
         start: outageItem.pocetok,
@@ -33,10 +33,12 @@ export function searchEvnOutages(
   evnOutagesData: Array<OutageModel>,
   user: UserModel
 ): Array<OutageModel> {
-  return evnOutagesData.filter((outageRecord) =>
-    outageRecord.municipality.toLowerCase()
+  console.log('user:', user);
+  return evnOutagesData.filter((outageRecord) => {
+    console.log(outageRecord)
+    return outageRecord.municipality.toLowerCase()
       .match(user.municipality.toLowerCase()) && 
       user.addressLocations.some((address) => 
-        outageRecord.address.toLowerCase().includes(address.toLowerCase()))
+        outageRecord.address.toLowerCase().includes(address.toLowerCase())) }
   );
 }

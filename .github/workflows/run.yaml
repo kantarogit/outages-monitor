@@ -19,7 +19,7 @@ jobs:
           npx tsc
       - name: Run main function
         env:
-          MAIL_API_KEY: ${{ secrets.MAIL_API_KEY }}
-          MAIL_SECRET: ${{ secrets.MAIL_SECRET }}
+          PUSHOVER_TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
+          PUSHOVER_USER: ${{ secrets.PUSHOVER_USER }}
         run: |
            npm run startApp

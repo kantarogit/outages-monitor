@@ -1,5 +1,6 @@
 import { getUsers } from "./client/configClient";
 import { getAllOutages, searchEvnOutages } from "./client/evnClient";
+import { sendPushNotification } from "./client/notificationClient";
 import { OutagesPerUserModel } from "./model/outagesModel";
 
 export async function evnFlow(): Promise<Array<OutagesPerUserModel>> {
@@ -7,7 +8,7 @@ export async function evnFlow(): Promise<Array<OutagesPerUserModel>> {
 
   const outageApiResponse = await getAllOutages();
   console.log("Outages fetched from EVN site...");
-  console.log(outageApiResponse)
+    console.log(JSON.stringify(outageApiResponse, null, 2));
 
   for (const user of getUsers()) {
       let outages = searchEvnOutages(outageApiResponse, user);
@@ -22,9 +23,9 @@ export async function evnFlow(): Promise<Array<OutagesPerUserModel>> {
 }
 
 evnFlow()
-  .then((outagesPerUser: Array<OutagesPerUserModel>) => {
+  .then(async (outagesPerUser: Array<OutagesPerUserModel>) => {
     console.log(JSON.stringify(outagesPerUser, null, 2));
-    // sendEmail(outagesPerUser);
+    await sendPushNotification(outagesPerUser);
   })
   .catch((err: any) => {
     console.log(err);
