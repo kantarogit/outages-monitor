@@ -4,7 +4,8 @@
   "description": "plnned power and water outages monitor",
   "main": "index.js",
   "scripts": {
-    "startApp": "tsx main.ts",
+    "startAppProd": "node main.js",
+    "startAppTest": "tsx main.ts",
     "dev": "tsx watch main.ts",
     "sendEmail": "tsx client/mailClient.ts"
   },
