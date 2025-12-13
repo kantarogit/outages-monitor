@@ -31,7 +31,11 @@ export async function sendPushNotification(outagesPerUser: Array<OutagesPerUserM
       params.append('html', '1');
       params.append('title', 'EVN Outage Alert');
 
-      await axios.post('https://api.pushover.net/1/messages.json', params);
+      try { 
+        await axios.post('https://api.pushover.net/1/messages.json', params);
+      } catch (error) {
+        console.error(`Failed to send notification to ${user.email}:`, error);
+      }
     }
   });
 }
