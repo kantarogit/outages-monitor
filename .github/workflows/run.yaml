@@ -3,7 +3,7 @@ name: Run
 # schedule should be every night at 9:30 pm
 on:
   schedule:
-    - cron: '0 21 30 * *'
+    - cron: '30 21 * * *'
 
 jobs:
   build:
