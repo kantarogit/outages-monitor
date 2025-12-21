@@ -12,7 +12,7 @@ export async function sendPushNotification(outagesPerUser: Array<OutagesPerUserM
     if (outages.length > 0) {
       console.log(`Sending notification to ${user.email} about ${outages.length} outages.`);
 
-      let message = `<h2>Dear ${user.email},</h2><p>The following outages were found for your locations:</p><ul>`;
+      let message = `<h2>Hello,</h2><p>The following outages were found for your locations:</p><ul>`;
       outages.forEach((outage, index) => {
         message += `<li><h3>Outage ${index + 1}: ${outage.municipality.charAt(0).toUpperCase() + outage.municipality.slice(1)}</h3>`;
         message += `<p><strong>Address:</strong> ${outage.address.charAt(0).toUpperCase() + outage.address.slice(1)}<br>`;
