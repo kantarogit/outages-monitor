@@ -49,9 +49,9 @@ export function searchEvnOutages(
   user: UserModel
 ): Array<OutageModel> {
   return evnOutagesData.filter((outageRecord) => {
-    return outageRecord.municipality.toLowerCase()
+    return outageRecord.municipality
       .includes(user.municipality.toLowerCase()) && 
       user.addressLocations.some((address) => 
-        outageRecord.address.toLowerCase().includes(address.toLowerCase())) }
+        outageRecord.address.includes(address.toLowerCase())) }
   );
 }
