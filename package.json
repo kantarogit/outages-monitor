@@ -1,7 +1,7 @@
 {
   "name": "outages-monitor",
   "version": "1.0.0",
-  "description": "plnned power and water outages monitor",
+  "description": "planned power and water outages monitor",
   "main": "index.js",
   "scripts": {
     "startAppProd": "node main.js",
