@@ -50,7 +50,7 @@ export function searchEvnOutages(
 ): Array<OutageModel> {
   return evnOutagesData.filter((outageRecord) => {
     return outageRecord.municipality.toLowerCase()
-      .match(user.municipality.toLowerCase()) && 
+      .includes(user.municipality.toLowerCase()) && 
       user.addressLocations.some((address) => 
         outageRecord.address.toLowerCase().includes(address.toLowerCase())) }
   );
