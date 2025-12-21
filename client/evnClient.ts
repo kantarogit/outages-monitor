@@ -33,9 +33,7 @@ export function searchEvnOutages(
   evnOutagesData: Array<OutageModel>,
   user: UserModel
 ): Array<OutageModel> {
-  console.log('user:', user);
   return evnOutagesData.filter((outageRecord) => {
-    console.log(outageRecord)
     return outageRecord.municipality.toLowerCase()
       .match(user.municipality.toLowerCase()) && 
       user.addressLocations.some((address) => 
