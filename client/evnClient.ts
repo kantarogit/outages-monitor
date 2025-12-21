@@ -9,18 +9,33 @@ export async function getAllOutages(): Promise<Array<OutageModel>> {
       "https://portal-api.elektrodistribucija.mk/DSO/Prekini/ZemiPrekini"
     );
 
-    // console.log(response.data);
-    return response.data.map( (outageItem: { pocetok: any; kraj: any; napNivo: any; nasMesto: string; adresa: string; tipPrekin: any; kecId: any; }) => {
-      return {
-        start: outageItem.pocetok,
-        end: outageItem.kraj,
-        voltageLevel: outageItem.napNivo,
-        municipality: outageItem.nasMesto.toLowerCase(),
-        address: outageItem.adresa.toLowerCase(),
-        type: outageItem.tipPrekin,
-        energyCenter: outageItem.kecId
-      } as OutageModel;
-    });
+    const rawData = response.data;
+
+    if (!Array.isArray(rawData)) {
+      throw new Error("Unexpected response format from EVN site: expected an array.");
+    }
+
+    // console.log(rawData);
+    return rawData
+      .filter((outageItem: any) => {
+        return (
+          outageItem !== null &&
+          typeof outageItem === "object" &&
+          typeof outageItem.nasMesto === "string" &&
+          typeof outageItem.adresa === "string"
+        );
+      })
+      .map((outageItem: { pocetok: any; kraj: any; napNivo: any; nasMesto: string; adresa: string; tipPrekin: any; kecId: any; }) => {
+        return {
+          start: outageItem.pocetok,
+          end: outageItem.kraj,
+          voltageLevel: outageItem.napNivo,
+          municipality: outageItem.nasMesto.toLowerCase(),
+          address: outageItem.adresa.toLowerCase(),
+          type: outageItem.tipPrekin,
+          energyCenter: outageItem.kecId
+        } as OutageModel;
+      });
   } catch (error) {
     console.log(error);
     throw new Error(
