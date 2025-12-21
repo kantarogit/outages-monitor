@@ -1,9 +1,9 @@
 name: Run
 
-# schedule should be every night at 7 pm
+# schedule should be every night at 9:30 pm
 on:
   schedule:
-    - cron: '0 21 * * *'
+    - cron: '0 21 30 * *'
 
 jobs:
   build:
