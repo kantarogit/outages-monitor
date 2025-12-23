@@ -1,0 +1,25 @@
+{
+  "users": [
+    {
+      "email": "kantarofilip@gmail.com",
+      "municipality": "прилеп",
+      "addressLocations": [
+        "прилеп",
+        "александар македонски",
+        "димо наредникот"
+      ]
+    },
+    {
+      "email": "kantarofilip@gmail.com",
+      "municipality": "скопје",
+      "addressLocations": [
+        "скопје",
+        "тафталиџе",
+        "урош џудовиќ",
+        "будимпештанска",
+        "осло",
+        "христо смирненски"
+      ]
+    }
+  ]
+}

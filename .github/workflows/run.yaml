@@ -1,25 +1,29 @@
 name: Run
 
-# schedule should be every night at 10 pm
-
-on: workflow_dispatch
+# schedule should be every night at 9:30 pm
+on:
+  schedule:
+    - cron: '30 21 * * *'
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: ENV_PROD
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js 14.x
+      - name: Use Node.js 18.x
         uses: actions/setup-node@v1
         with:
-          node-version: 14.x
-      - name: Compile
+          node-version: 18.x
+      - name: Install dependencies
         run: |
           npm install
+      - name: Compile TypeScript
+        run: |
           npx tsc
       - name: Run main function
         env:
-          MAIL_API_KEY: ${{ secrets.MAIL_API_KEY }}
-          MAIL_SECRET: ${{ secrets.MAIL_SECRET }}
+          PUSHOVER_TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
+          PUSHOVER_USER: ${{ secrets.PUSHOVER_USER }}
         run: |
-           npm run startApp
+           npm run startAppProd

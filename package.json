@@ -1,17 +1,20 @@
 {
   "name": "outages-monitor",
   "version": "1.0.0",
-  "description": "plnned power and water outages monitor",
+  "description": "planned power and water outages monitor",
   "main": "index.js",
   "scripts": {
-    "startApp": "node main.js",
-    "sendEmail": "node client/mailClient.js"
+    "startAppProd": "node main.js",
+    "startAppTest": "tsx main.ts",
+    "dev": "tsx watch main.ts",
+    "sendEmail": "tsx client/mailClient.ts"
   },
   "author": "Filip Kantardjioski",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^20.2.5",
+    "@types/node": "^20.19.26",
     "@types/xlsx": "^0.0.36",
+    "tsx": "^4.21.0",
     "typescript": "^5.1.3"
   },
   "dependencies": {

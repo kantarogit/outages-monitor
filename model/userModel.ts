@@ -1,5 +1,5 @@
-export type userModel = {
+export type UserModel = {
     email: string,
-    userEnergyCenter: string,
+    municipality: string,
     addressLocations: Array<string>
 }
